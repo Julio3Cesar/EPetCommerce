@@ -2,6 +2,7 @@ package com.example.epetcommerce;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -75,8 +76,10 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     customer = response.body();
                 } else {
-                    Toast toast = Toast.makeText(getApplicationContext(), "Email ou senha inválidos.", Toast.LENGTH_LONG);
-                    toast.show();
+                    //Toast toast = Toast.makeText(getApplicationContext(), "Email ou senha inválidos.", Toast.LENGTH_LONG);
+                    //toast.show();
+
+                    showDialog("Email ou senha inválidos.", "Erro");
                 }
             }
 
@@ -88,6 +91,25 @@ public class LoginActivity extends AppCompatActivity {
             }
         };
          getCustomerCall.enqueue(Callback);
+    }
+
+    private void showDialog(String message, String title) {
+        //Declara e instancia uma fábrica de construção de diálogos
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //Configura o corpo da mensagem
+        builder.setMessage(message);
+        //Configura o título da mensagem
+        builder.setTitle(title);
+        //Impede que o botão seja cancelável (possa clicar
+        //em voltar ou fora para fechar)
+        builder.setCancelable(false);
+        //Configura um botão de OK para fechamento (um
+        //outro listener pode ser configurado no lugar do "null")
+        builder.setPositiveButton("OK", null);
+        //Cria efetivamente o diálogo
+        AlertDialog dialog = builder.create();
+        //Faz com que o diálogo apareça na tela
+        dialog.show();
     }
 
 }
