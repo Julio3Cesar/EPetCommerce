@@ -1,8 +1,10 @@
 package com.example.epetcommerce;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -20,6 +22,12 @@ public class NavigationDrawerActivity extends AppCompatActivity
 
     FrameLayout fragmentContainer;
 
+    RecyclerView container;
+    //AdapterProduto adapter;
+    RecyclerView.LayoutManager layoutManager;
+
+    private static Context instance;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +44,13 @@ public class NavigationDrawerActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         fragmentContainer = findViewById(R.id.fragmentContainer);
+
+        instance = this.getBaseContext();
+    }
+
+    public static Context getContext()
+    {
+        return instance;
     }
 
     @Override
