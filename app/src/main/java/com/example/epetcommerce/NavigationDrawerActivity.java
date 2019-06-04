@@ -13,9 +13,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.FrameLayout;
 
 public class NavigationDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    FrameLayout fragmentContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        fragmentContainer = findViewById(R.id.fragmentContainer);
     }
 
     @Override
@@ -74,6 +79,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
+            OpenProductList();
 
         } else if (id == R.id.nav_slideshow) {
 
@@ -89,4 +95,14 @@ public class NavigationDrawerActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private void OpenProductList()
+    {
+        FragmentProductList fragProduct = new FragmentProductList();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragProduct).commit();
+
+    }
+
+
+
 }
