@@ -73,7 +73,6 @@ public class CreateAccountActivity extends AppCompatActivity {
         Callback<Customer> Callback = new Callback<Customer>() {
             @Override
             public void onResponse(Call<Customer> call, Response<Customer> response) {
-                String msg = response.message();
                 if (response.isSuccessful() && response.body() != null) {
                     Toast toast = Toast.makeText(getApplicationContext(), "Cadastrado com sucesso!", Toast.LENGTH_LONG);
                     toast.show();
