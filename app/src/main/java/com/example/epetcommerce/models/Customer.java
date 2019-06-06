@@ -6,7 +6,7 @@ public class Customer {
     private String dtNascCliente = null;
     private String emailCliente;
     private String senhaCliente = null;
-    private String cpfcliente;
+    private String CPFCliente;
     private String recebeNewsLetter = null;
     private String telComercialCliente = null;
     private String telResidencialCliente = null;
@@ -23,10 +23,11 @@ public class Customer {
         this.senhaCliente = password;
     }
 
-    public Customer(String name, String email, String password) {
+    public Customer(String name, String email, String password, String cpf) {
         this.nomeCompletoCliente = name;
         this.emailCliente = email;
         this.senhaCliente = password;
+        this.CPFCliente = cpf;
     }
 
     // Getter Methods
@@ -47,8 +48,8 @@ public class Customer {
         return senhaCliente;
     }
 
-    public String getCpfcliente() {
-        return cpfcliente;
+    public String getCPFCliente() {
+        return CPFCliente;
     }
 
     public String getRecebeNewsLetter() {
@@ -89,8 +90,8 @@ public class Customer {
         this.senhaCliente = senhaCliente;
     }
 
-    public void setCpfcliente(String cpfcliente) {
-        this.cpfcliente = cpfcliente;
+    public void setCPFCliente(String CPFCliente) {
+        this.CPFCliente = CPFCliente;
     }
 
     public void setRecebeNewsLetter(String recebeNewsLetter) {

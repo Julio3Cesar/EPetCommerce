@@ -26,7 +26,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     private EditText txtEmail;
     private EditText txtPassword;
     private EditText txtConfirmPassword;
-
+    private EditText txtCpf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +35,11 @@ public class CreateAccountActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        txtName = findViewById(R.id.txtName);
+        txtName = findViewById(R.id.txtCpf);
         txtEmail = findViewById(R.id.txtEmail);
         txtPassword = findViewById(R.id.txtLoginPassword);
         txtConfirmPassword = findViewById(R.id.txtConfirmPassword);
+        txtCpf = findViewById(R.id.txtCpf);
 
         btnSendCreateAccount = findViewById(R.id.btnSendCreateAccount);
         btnSendCreateAccount.setOnClickListener(new View.OnClickListener() {
@@ -65,13 +66,14 @@ public class CreateAccountActivity extends AppCompatActivity {
         ICustomerClient customerClient =
                 instanceRetrofit.create(ICustomerClient.class);
 
-        Customer customer = new Customer(txtName.getText().toString(), txtEmail.getText().toString(), txtPassword.getText().toString());
+        Customer customer = new Customer(txtName.getText().toString(), txtEmail.getText().toString(), txtPassword.getText().toString(), txtCpf.getText().toString());
 
         Call<Customer> setCustomerCall = customerClient.setCustomer(customer);
 
         Callback<Customer> Callback = new Callback<Customer>() {
             @Override
             public void onResponse(Call<Customer> call, Response<Customer> response) {
+                String msg = response.message();
                 if (response.isSuccessful() && response.body() != null) {
                     Toast toast = Toast.makeText(getApplicationContext(), "Cadastrado com sucesso!", Toast.LENGTH_LONG);
                     toast.show();
