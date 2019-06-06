@@ -23,6 +23,12 @@ public class Customer {
         this.senhaCliente = password;
     }
 
+    public Customer(String name, String email, String password) {
+        this.nomeCompletoCliente = name;
+        this.emailCliente = email;
+        this.senhaCliente = password;
+    }
+
     // Getter Methods
 
     public Integer getIdCliente() {

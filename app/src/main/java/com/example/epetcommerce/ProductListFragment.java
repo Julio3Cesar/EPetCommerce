@@ -28,14 +28,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentProductList extends Fragment {
+public class ProductListFragment extends Fragment {
 
 
     RecyclerView cardContainer;
     ProductAdapter adapter;
     RecyclerView.LayoutManager layoutManager;
 
-    public FragmentProductList() {
+    public ProductListFragment() {
         // Required empty public constructor
     }
 

@@ -2,10 +2,7 @@ package com.example.epetcommerce;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
@@ -113,7 +110,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
 
     private void OpenProductList()
     {
-        FragmentProductList fragProduct = new FragmentProductList();
+        ProductListFragment fragProduct = new ProductListFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragProduct).commit();
 
     }

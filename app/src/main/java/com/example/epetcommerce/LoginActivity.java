@@ -57,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     private void getCustomer(String email, String password) {

@@ -10,4 +10,7 @@ public interface ICustomerClient {
 
     @POST("/android/rest/cliente")
     Call<Customer> getCustomer(@Body Customer customer);
+
+    @POST("/android/rest/cliente/cadastro")
+    Call<Customer> setCustomer(@Body Customer customer);
 }
