@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.epetcommerce.clients.ICustomerClient;
+import com.example.epetcommerce.database.UserData;
 import com.example.epetcommerce.models.Customer;
 
 import retrofit2.Call;
@@ -52,6 +53,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 getCustomer(txtLoginEmail.getText().toString(), txtLoginPassword.getText().toString());
                 if(customer != null) {
+                    UserData userData  = UserData.getInstance();
+                    userData.setUser(customer);
                     Intent loginIntent = new Intent(LoginActivity.this, NavigationDrawerActivity.class);
                     startActivity(loginIntent);
                 }
