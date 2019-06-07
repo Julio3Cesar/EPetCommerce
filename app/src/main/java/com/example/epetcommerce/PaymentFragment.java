@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -27,15 +28,14 @@ public class PaymentFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_payment, container, false);
 
-        RadioGroup radioGroupPayment = view.findViewById(R.id.radioGroupPayment);
-        final ImageView imgCreditCard = view.findViewById(R.id.imgCreditCard);
+        imgCreditCard = view.findViewById(R.id.imgCreditCard);
 
-        RadioButton checkBill = view.findViewById(R.id.checkBill);
-        final RadioButton checkCreditCard = view.findViewById(R.id.checkCreditCard);
-        checkCreditCard.setOnClickListener(new View.OnClickListener() {
+        checkBill = view.findViewById(R.id.checkBill);
+        checkCreditCard = view.findViewById(R.id.checkCreditCard);
+        checkCreditCard.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                if(checkCreditCard.isChecked()){
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
                     imgCreditCard.setVisibility(View.VISIBLE);
                 }else{
                     imgCreditCard.setVisibility(View.INVISIBLE);
@@ -43,7 +43,7 @@ public class PaymentFragment extends Fragment {
             }
         });
 
-        Button btnFinalize = view.findViewById(R.id.btnFinalize);
+        btnFinalize = view.findViewById(R.id.btnFinalize);
         btnFinalize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -43,7 +43,7 @@ public class ShowProductFragment extends Fragment {
                 // TODO: Adicionar ao singleton de produtos
 
                 ProductListFragment productListFragment = new ProductListFragment();
-                getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, productListFragment);
+                getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, productListFragment).commit();
             }
         });
 
@@ -54,7 +54,7 @@ public class ShowProductFragment extends Fragment {
                 // TODO: Adicionar ao singleton de produtos
 
                 CartFragment cartFragment = new CartFragment();
-                getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, cartFragment);
+                getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, cartFragment).commit();
             }
         });
 
