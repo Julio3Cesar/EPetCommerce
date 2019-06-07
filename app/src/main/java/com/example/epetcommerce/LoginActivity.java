@@ -77,8 +77,6 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     customer = response.body();
                 } else {
-                    //Toast toast = Toast.makeText(getApplicationContext(), "Email ou senha inválidos.", Toast.LENGTH_LONG);
-                    //toast.show();
 
                     showDialog("Email ou senha inválidos.", "Erro");
                 }

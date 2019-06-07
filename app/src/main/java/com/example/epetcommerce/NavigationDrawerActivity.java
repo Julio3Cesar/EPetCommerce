@@ -43,6 +43,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
         fragmentContainer = findViewById(R.id.fragmentContainer);
 
         instance = this.getBaseContext();
+
+        OpenProductList();
     }
 
     public static Context getContext()
@@ -88,18 +90,10 @@ public class NavigationDrawerActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_produtos) {
             OpenProductList();
+        } else if (id == R.id.nav_cart) {
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_tools) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
 
         }
 

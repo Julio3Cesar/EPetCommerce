@@ -2,6 +2,7 @@ package com.example.epetcommerce;
 
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.epetcommerce.clients.IProductClient;
 import com.example.epetcommerce.models.Product;
@@ -77,17 +79,19 @@ public class ProductListFragment extends Fragment {
                 ArrayList<ProductCard> productCards = new ArrayList<ProductCard>();
 
                 if (response.isSuccessful() && Products != null) {
-                    String imgUrl = "https://oficinacordova.azurewebsites.net/android/rest/Product/image/";
+                    String imgUrl = "https://oficinacordova.azurewebsites.net/android/rest/produto/image/";
                     for (Product Product : Products) {
                         //CriarCard(Product, imgUrl);
-                        productCards.add(new ProductCard(imgUrl + Product.getIdProduto(),
+                        productCards.add(new ProductCard(imgUrl + Product.getIdProduto() ,
                                 Float.toString(Product.getPrecProduto()), Product.getNomeProduto(), Product));
                     }
                     adapter = new ProductAdapter(productCards);
                     adapter.setOnItemClickListener(new ProductAdapter.IOnItemClickListener() {
                         @Override
                         public void onItemClick(ProductCard ProductCard) {
-                            showDialog("Clickado", ProductCard.getTxtNomeCard());
+                            ShowProductFragment fragProduct = new ShowProductFragment();
+                            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragProduct).commit();
+
                         }
                     });
                     cardContainer.setAdapter(adapter);
