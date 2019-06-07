@@ -13,13 +13,6 @@ import android.view.ViewGroup;
  */
 public class CartFragment extends Fragment {
 
-
-
-    public CartFragment() {
-        // Required empty public constructor
-    }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

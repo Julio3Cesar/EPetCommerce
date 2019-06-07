@@ -115,5 +115,4 @@ public class LoginActivity extends AppCompatActivity {
         //Faz com que o diálogo apareça na tela
         dialog.show();
     }
-
 }
