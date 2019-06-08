@@ -15,6 +15,8 @@ import com.example.epetcommerce.clients.ICustomerClient;
 import com.example.epetcommerce.database.UserData;
 import com.example.epetcommerce.models.Customer;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -56,15 +58,15 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBarLogin.setVisibility(View.VISIBLE);
+                //progressBarLogin.setVisibility(View.VISIBLE);
                 getCustomer(txtLoginEmail.getText().toString(), txtLoginPassword.getText().toString());
-                if(customer != null) {
-                    UserData userData  = UserData.getInstance();
-                    userData.setUser(customer);
-                    Intent loginIntent = new Intent(LoginActivity.this, NavigationDrawerActivity.class);
-                    startActivity(loginIntent);
-                }
-                progressBarLogin.setVisibility(View.GONE);
+//                if(customer != null) {
+//                    UserData userData  = UserData.getInstance();
+//                    userData.setUser(customer);
+//                    Intent loginIntent = new Intent(LoginActivity.this, NavigationDrawerActivity.class);
+//                    startActivity(loginIntent);
+//                }
+                //progressBarLogin.setVisibility(View.GONE);
             }
         });
 
@@ -85,10 +87,17 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Customer> call, Response<Customer> response) {
                 if (response.isSuccessful() && response.body() != null) {
+
                     customer = response.body();
+                    UserData userData  = UserData.getInstance();
+                    userData.setUser(customer);
+                    Intent loginIntent = new Intent(LoginActivity.this, NavigationDrawerActivity.class);
+                    startActivity(loginIntent);
+                    progressBarLogin.setVisibility(View.GONE);
                 } else {
 
                     showDialog("Email ou senha inválidos.", "Erro");
+                    progressBarLogin.setVisibility(View.GONE);
                 }
             }
 
@@ -97,9 +106,12 @@ public class LoginActivity extends AppCompatActivity {
                 t.printStackTrace();
                 Toast toast = Toast.makeText(getApplicationContext(), "Algo deu errado!", Toast.LENGTH_LONG);
                 toast.show();
+                progressBarLogin.setVisibility(View.GONE);
             }
         };
-         getCustomerCall.enqueue(Callback);
+        progressBarLogin.setVisibility(View.VISIBLE);
+        getCustomerCall.enqueue(Callback);
+
     }
 
     private void showDialog(String message, String title) {

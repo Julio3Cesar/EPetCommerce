@@ -37,6 +37,7 @@ public class CartFragment extends Fragment {
     private LinearLayout cartContainer;
     private TextView txtTotalProducts;
     private TextView txtValueTotalProducts;
+    private Button btnCleanCart;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,13 +57,23 @@ public class CartFragment extends Fragment {
         });
 
         cartContainer = view.findViewById(R.id.cartContainer);
+        btnCleanCart = view.findViewById(R.id.btnCleanCart);
+
+        btnCleanCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ProductData.getInstance().getProducts().clear();
+                ProductListFragment productListFragment = new ProductListFragment();
+                getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, productListFragment).commit();
+            }
+        });
 
         List<Product> products = ProductData.getInstance().getProducts();
 
         if(products != null)
         {
 
-            //txtTotalProducts.setText(products.size());
+            txtTotalProducts.setText(Integer.toString(products.size()) + " Item(s) no carrinho");
         }
 
 

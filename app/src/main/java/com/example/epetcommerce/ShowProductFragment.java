@@ -79,9 +79,7 @@ public class ShowProductFragment extends Fragment {
             public void onClick(View v) {
                 // TODO: Adicionar ao singleton de produtos
 
-                ArrayList<Product> products = new ArrayList<>();
-                products.add(product);
-                productData.setProducts(products);
+                productData.getProducts().add(product);
 
                 CartFragment cartFragment = new CartFragment();
                 getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, cartFragment).commit();
