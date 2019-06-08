@@ -8,6 +8,7 @@ public class ProductData {
     private static ProductData productData;
 
     private List<Product> products;
+    private Product activeProduct;
 
     private ProductData(){
 
@@ -25,5 +26,13 @@ public class ProductData {
 
     public void setProducts(List<Product> products) {
         this.products = products;
+    }
+
+    public Product getActiveProduct() {
+        return activeProduct;
+    }
+
+    public void setActiveProduct(Product activeProduct) {
+        this.activeProduct = activeProduct;
     }
 }

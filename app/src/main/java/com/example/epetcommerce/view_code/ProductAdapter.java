@@ -78,13 +78,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProdutoV
     public void onBindViewHolder(ProdutoViewHolder holder, int position) {
         ProductCard produto = _ProductCards.get(position);
 
-        holder.txtPreco.setText("R$ " + produto.getTxtPrecoCard() + "0");
-        holder.txtNome.setText(produto.getTxtNomeCard());
+        String imgUrl = "https://oficinacordova.azurewebsites.net/android/rest/produto/image/";
+
+        holder.txtPreco.setText("R$ " + produto.GetProduto().getPrecProduto() + "0");
+        holder.txtNome.setText(produto.GetProduto().getNomeProduto());
 
         ImageLoader imageLoader = ImageLoader.getInstance();
         imageLoader.init(ImageLoaderConfiguration.createDefault(NavigationDrawerActivity.getContext()));
 
-        imageLoader.displayImage(produto.getImgCardUri(), holder.imgCard);
+        imageLoader.displayImage(imgUrl + produto.GetProduto().getIdProduto(), holder.imgCard);
 
     }
 

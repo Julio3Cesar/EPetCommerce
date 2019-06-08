@@ -42,6 +42,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtLoginEmail" />
 
+    <ProgressBar
+        android:id="@+id/progressBarLogin"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtLoginPassword"
+        />
+
+
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="325dp"
@@ -58,7 +70,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtLoginPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/progressBarLogin" />
 
     <Button
         android:id="@+id/btnCreateAccount"
@@ -127,6 +139,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgBtnTwitter"
         app:srcCompat="@drawable/logingoogle" />
+
 
 </android.support.constraint.ConstraintLayout>
 

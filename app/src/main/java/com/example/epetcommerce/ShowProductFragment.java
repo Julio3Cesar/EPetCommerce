@@ -10,6 +10,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.epetcommerce.database.ProductData;
+import com.example.epetcommerce.models.Product;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
+import java.util.ArrayList;
 
 
 /**
@@ -36,14 +44,34 @@ public class ShowProductFragment extends Fragment {
         TextView txtProductAmount = view.findViewById(R.id.txtProductAmount);
         ImageView imgShowProduct = view.findViewById(R.id.imgShowProduct);
 
+        final ProductData productData = ProductData.getInstance();
+        final Product product = productData.getActiveProduct();
+
+        txtProductName.setText(product.getNomeProduto());
+        txtProductDescription.setText(product.getDescProduto());
+        txtProductAmount.setText("R$ "+ Float.toString(product.getPrecProduto()));
+
+        ImageLoader imageLoader = ImageLoader.getInstance();
+        imageLoader.init(ImageLoaderConfiguration.createDefault(NavigationDrawerActivity.getContext()));
+        String imgUrl = "https://oficinacordova.azurewebsites.net/android/rest/produto/image/";
+        imageLoader.displayImage(imgUrl + product.getIdProduto(), imgShowProduct);
+
         Button btnAddToCart = view.findViewById(R.id.btnAddToCart);
         btnAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO: Adicionar ao singleton de produtos
 
+                ArrayList<Product> products = new ArrayList<>();
+                products.add(product);
+                productData.setProducts(products);
+
+                Toast toast = Toast.makeText(getContext(), "Produto adicionado ao carrinho", Toast.LENGTH_LONG);
+                toast.show();
+
                 ProductListFragment productListFragment = new ProductListFragment();
                 getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, productListFragment).commit();
+
             }
         });
 
@@ -52,6 +80,10 @@ public class ShowProductFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // TODO: Adicionar ao singleton de produtos
+
+                ArrayList<Product> products = new ArrayList<>();
+                products.add(product);
+                productData.setProducts(products);
 
                 CartFragment cartFragment = new CartFragment();
                 getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, cartFragment).commit();

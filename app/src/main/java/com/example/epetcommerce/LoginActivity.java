@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.epetcommerce.clients.ICustomerClient;
@@ -28,13 +29,17 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin;
     private EditText txtLoginEmail;
     private EditText txtLoginPassword;
-
+    private ProgressBar progressBarLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        progressBarLogin = findViewById(R.id.progressBarLogin);
+
+        progressBarLogin.setVisibility(View.GONE);
 
         btnCreateAccount = findViewById(R.id.btnCreateAccount);
         btnCreateAccount.setOnClickListener(new View.OnClickListener() {
@@ -51,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBarLogin.setVisibility(View.VISIBLE);
                 getCustomer(txtLoginEmail.getText().toString(), txtLoginPassword.getText().toString());
                 if(customer != null) {
                     UserData userData  = UserData.getInstance();
@@ -58,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                     Intent loginIntent = new Intent(LoginActivity.this, NavigationDrawerActivity.class);
                     startActivity(loginIntent);
                 }
+                progressBarLogin.setVisibility(View.GONE);
             }
         });
 

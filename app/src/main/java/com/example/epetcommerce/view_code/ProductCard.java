@@ -4,29 +4,13 @@ import com.example.epetcommerce.models.Product;
 
 public class ProductCard {
 
-    private String imgCardUri;
-    private String txtPrecoCard;
-    private String txtNomeCard;
+    private Product product;
 
-    private Product _produto;
-
-    public ProductCard(String imgResource, String precoCard, String nomeCard, Product produto)
+    public ProductCard(Product produto)
     {
-        imgCardUri = imgResource;
-        txtNomeCard = nomeCard;
-        txtPrecoCard = precoCard;
-        _produto = produto;
+        product = produto;
     }
 
-    public String getImgCardUri() {
-        return imgCardUri;
-    }
 
-    public String getTxtPrecoCard() {
-        return txtPrecoCard;
-    }
-
-    public String getTxtNomeCard() {
-        return txtNomeCard;
-    }
+    public Product GetProduto() {return product;}
 }

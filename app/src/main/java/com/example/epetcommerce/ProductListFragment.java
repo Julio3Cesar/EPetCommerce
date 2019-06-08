@@ -4,6 +4,7 @@ package com.example.epetcommerce;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.epetcommerce.clients.IProductClient;
+import com.example.epetcommerce.database.ProductData;
 import com.example.epetcommerce.models.Product;
 import com.example.epetcommerce.view_code.ProductAdapter;
 import com.example.epetcommerce.view_code.ProductCard;
@@ -52,7 +54,8 @@ public class ProductListFragment extends Fragment {
         cardContainer.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(NavigationDrawerActivity.getContext());
         cardContainer.setLayoutManager(layoutManager);
-
+        adapter = new ProductAdapter(new ArrayList<ProductCard>());
+        cardContainer.setAdapter(adapter);
         CarregarLista();
         return view;
     }
@@ -76,19 +79,22 @@ public class ProductListFragment extends Fragment {
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
 
                 List<Product> Products = response.body();
-                ArrayList<ProductCard> productCards = new ArrayList<ProductCard>();
+                final ArrayList<ProductCard> productCards = new ArrayList<ProductCard>();
 
                 if (response.isSuccessful() && Products != null) {
-                    String imgUrl = "https://oficinacordova.azurewebsites.net/android/rest/produto/image/";
+
                     for (Product Product : Products) {
                         //CriarCard(Product, imgUrl);
-                        productCards.add(new ProductCard(imgUrl + Product.getIdProduto() ,
-                                Float.toString(Product.getPrecProduto()), Product.getNomeProduto(), Product));
+                        productCards.add(new ProductCard(Product));
                     }
+
                     adapter = new ProductAdapter(productCards);
                     adapter.setOnItemClickListener(new ProductAdapter.IOnItemClickListener() {
                         @Override
                         public void onItemClick(ProductCard ProductCard) {
+                            ProductData productData = ProductData.getInstance();
+                            productData.setActiveProduct(ProductCard.GetProduto());
+
                             ShowProductFragment fragProduct = new ShowProductFragment();
                             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragProduct).commit();
 
