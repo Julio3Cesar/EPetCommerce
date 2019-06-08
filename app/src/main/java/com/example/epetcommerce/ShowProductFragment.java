@@ -62,9 +62,7 @@ public class ShowProductFragment extends Fragment {
             public void onClick(View v) {
                 // TODO: Adicionar ao singleton de produtos
 
-                ArrayList<Product> products = new ArrayList<>();
-                products.add(product);
-                productData.setProducts(products);
+                productData.getProducts().add(product);
 
                 Toast toast = Toast.makeText(getContext(), "Produto adicionado ao carrinho", Toast.LENGTH_LONG);
                 toast.show();

@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.example.epetcommerce.database.ProductData;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -47,6 +49,9 @@ public class PaymentFragment extends Fragment {
         btnFinalize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ProductData productData = ProductData.getInstance();
+                productData.getProducts().clear();
+
                 FinalizedFragment finalizedFragment = new FinalizedFragment();
                 getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, finalizedFragment).commit();
             }

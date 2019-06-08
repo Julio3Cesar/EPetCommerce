@@ -93,8 +93,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
         if (id == R.id.nav_produtos) {
             OpenProductList();
         } else if (id == R.id.nav_cart) {
-
-
+            CartFragment fragCart = new CartFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragCart).commit();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

@@ -2,6 +2,7 @@ package com.example.epetcommerce.database;
 
 import com.example.epetcommerce.models.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductData {
@@ -11,14 +12,16 @@ public class ProductData {
     private Product activeProduct;
 
     private ProductData(){
-
+        products = new ArrayList<>();
     }
+
     public static ProductData getInstance(){
         if(productData==null){
             productData=new ProductData();
         }
         return productData;
     }
+
 
     public List<Product> getProducts() {
         return products;
@@ -31,6 +34,8 @@ public class ProductData {
     public Product getActiveProduct() {
         return activeProduct;
     }
+
+
 
     public void setActiveProduct(Product activeProduct) {
         this.activeProduct = activeProduct;
