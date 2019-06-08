@@ -35,6 +35,8 @@ public class CartFragment extends Fragment {
 
     private Button btnToPayment;
     private LinearLayout cartContainer;
+    private TextView txtTotalProducts;
+    private TextView txtValueTotalProducts;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,6 +44,8 @@ public class CartFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_cart, container, false);
 
+        txtTotalProducts = view.findViewById(R.id.txtTotalProducts);
+        txtValueTotalProducts = view.findViewById(R.id.txtValueTotalProducts);
         btnToPayment = view.findViewById(R.id.btnToPayment);
         btnToPayment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +59,13 @@ public class CartFragment extends Fragment {
 
         List<Product> products = ProductData.getInstance().getProducts();
 
+        if(products != null)
+        {
+
+            //txtTotalProducts.setText(products.size());
+        }
+
+
         if(products == null)
         {
             products = new ArrayList<Product>();
@@ -64,11 +75,13 @@ public class CartFragment extends Fragment {
             product.setNomeProduto("Nenhum produto no carrinho");
             products.add(product);
         }
-
+        float total = 0f;
         for(Product product : products)
         {
             addItem(product);
+            total += product.getPrecProduto();
         }
+        txtValueTotalProducts.setText("Valor Total: R$"+total);
 
         return view;
     }
