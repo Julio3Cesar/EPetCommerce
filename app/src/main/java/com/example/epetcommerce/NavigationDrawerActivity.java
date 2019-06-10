@@ -1,6 +1,7 @@
 package com.example.epetcommerce;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v4.view.GravityCompat;
@@ -12,10 +13,18 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.TextView;
+
+import com.example.epetcommerce.database.UserData;
 
 public class NavigationDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    TextView txtUserName;
+    TextView txtUserEmail;
 
     FrameLayout fragmentContainer;
 
@@ -44,11 +53,20 @@ public class NavigationDrawerActivity extends AppCompatActivity
 
         instance = this.getBaseContext();
 
+
+        View headerView = navigationView.getHeaderView(0);
+
+        txtUserEmail = (TextView) headerView.findViewById(R.id.txtuserEmailMenu);
+        txtUserName = (TextView) headerView.findViewById(R.id.txtUserNameMenu);
+
+        UserData userData = UserData.getInstance();
+
+        txtUserEmail.setText(userData.getUser().getEmailCliente());
+        txtUserName.setText(userData.getUser().getNomeCompletoCliente());
         OpenProductList();
     }
 
-    public static Context getContext()
-    {
+    public static Context getContext() {
         return instance;
     }
 
@@ -95,6 +113,14 @@ public class NavigationDrawerActivity extends AppCompatActivity
         } else if (id == R.id.nav_cart) {
             CartFragment fragCart = new CartFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragCart).commit();
+
+        } else if (id == R.id.nav_about) {
+            AboutFragment fragAbout = new AboutFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragAbout).commit();
+        } else if (id == R.id.nav_logout) {
+            Intent logout = new Intent(this, LoginActivity.class);
+            startActivity(logout);
+            finish();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -102,13 +128,11 @@ public class NavigationDrawerActivity extends AppCompatActivity
         return true;
     }
 
-    private void OpenProductList()
-    {
+    private void OpenProductList() {
         ProductListFragment fragProduct = new ProductListFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragProduct).commit();
 
     }
-
 
 
 }

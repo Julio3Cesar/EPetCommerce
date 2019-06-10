@@ -94,6 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                     Intent loginIntent = new Intent(LoginActivity.this, NavigationDrawerActivity.class);
                     startActivity(loginIntent);
                     progressBarLogin.setVisibility(View.GONE);
+                    finish();
                 } else {
 
                     showDialog("Email ou senha inválidos.", "Erro");
